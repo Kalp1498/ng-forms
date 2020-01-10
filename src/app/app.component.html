@@ -1,21 +1,74 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<input type="radio" name="gender" value="Male" (change)="getRadioSelected($event)" checked>Male
+<input type="radio" name="gender" value="Female" (change)="getRadioSelected($event)">Female
+
+<br><br>
+
+Selected Option : -
+
+&nbsp;&nbsp;{{ radioSelected }}
+<br>
+<hr>
+
+<!-- Using 2 Arrays -->
+
+Using 2 Arrays
+<br><br>
+
+<div *ngFor="let hobby of hobbiesForSingleArray">
+  <input type="checkbox" name="{{ hobby }}" value="{{ hobby }}" (change)="getCheckboxSelected($event)"> {{ hobby }}
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<br>
+
+Selected Option : -
+<span *ngFor="let hobby of hobbiesSelected">
+  &nbsp;&nbsp;{{ hobby }}
+</span>
+
+<br><hr>
+
+<!-- Using Object Array -->
+
+Using Object Array
+<br><br>
+
+<div *ngFor="let hobby of hobbiesForSingleArray">
+  <input type="checkbox" name="{{ hobby }}" value="{{ hobby }}" (change)="getCheckboxSelected1($event)"> {{ hobby }}
+</div>
+<br>
+
+Selected Option : -
+
+<span *ngFor="let hobby of hobbiesForObjectArray">
+  <span *ngIf="hobby.isSelected">
+    &nbsp;&nbsp;{{ hobby.hobbyName }}
+  </span>
+</span>
+
+<br><hr>
+
+<select (change)="getOptionSelected($event)">
+  <option *ngFor="let hobby of hobbiesForSingleArray">{{hobby}}</option>
+</select>
+
+<br><br>
+
+Selected Option : -
+
+&nbsp;&nbsp;{{ hobbySelectedSingleArray }}
+
+<br><hr>
+
+<select (change)="getOptionSelected1($event)">
+  <option *ngFor="let hobby of hobbiesForSingleArray">{{hobby}}</option>
+</select>
+
+<br><br>
+
+Selected Option : -
+
+&nbsp;&nbsp;{{ hobbySelectedObjectArray.id }} &nbsp;&nbsp; {{ hobbySelectedObjectArray.hobbyName }}
+
+<br><br>
 
 <router-outlet></router-outlet>
