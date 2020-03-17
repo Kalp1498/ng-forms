@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 interface HobbiesForCheckbox {
   id: number;
   hobbyName: string;
-  isSelected: boolean
+  isChecked: boolean
 }
 
 interface HobbiesForSelectOption {
@@ -20,7 +20,6 @@ interface HobbiesForSelectOption {
 export class AppComponent {
   radioSelected = "Male";
   hobbySelected: string;
-  isHobbyChecked: boolean = false;
   hobbySelectedSingleArray = "Cricket";
   hobbySelectedObjectArray : HobbiesForSelectOption = {id: 1, hobbyName: "Cricket"};
 
@@ -30,12 +29,10 @@ export class AppComponent {
 
   ngOnInit() {
     this.hobbiesForSingleArray = ["Cricket", "Football", "Movies", "Songs"]
-    this.hobbiesForObjectArray = [
-      {id: 1, hobbyName: this.hobbiesForSingleArray[0], isSelected: false},
-      {id: 2, hobbyName: this.hobbiesForSingleArray[1], isSelected: false},
-      {id: 3, hobbyName: this.hobbiesForSingleArray[2], isSelected: false},
-      {id: 4, hobbyName: this.hobbiesForSingleArray[3], isSelected: false},
-    ]
+    this.hobbiesForObjectArray = this.hobbiesForSingleArray.map((data, index) => {
+      return {id: index, hobbyName: data, isChecked: false}
+    });
+      
   }
 
   getRadioSelected(event) {
@@ -51,12 +48,8 @@ export class AppComponent {
     }
   }
 
-  getCheckboxSelected1(event) {
-    this.hobbiesForObjectArray.find(x => {
-      if(x.hobbyName === event.target.value) {
-        return x.isSelected = !x.isSelected;
-      }
-    })
+  getCheckboxSelected1(event, obj: HobbiesForCheckbox) {
+    obj.isChecked = !obj.isChecked
   }
 
   getOptionSelected(event) {
@@ -64,9 +57,8 @@ export class AppComponent {
   }
 
   getOptionSelected1(event) {
-    let id = event.srcElement.selectedIndex + 1;
-    let hobbyName = event.srcElement.value
-    this.hobbySelectedObjectArray = {id: id, hobbyName: hobbyName};
+    let index = event.srcElement.selectedIndex;
+    this.hobbySelectedObjectArray = {id: this.hobbiesForObjectArray[index].id, hobbyName: this.hobbiesForObjectArray[index].hobbyName}
   }
 
 }

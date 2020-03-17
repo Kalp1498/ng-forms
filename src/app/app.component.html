@@ -32,23 +32,21 @@ Selected Option : -
 Using Object Array
 <br><br>
 
-<div *ngFor="let hobby of hobbiesForSingleArray">
-  <input type="checkbox" name="{{ hobby }}" value="{{ hobby }}" (change)="getCheckboxSelected1($event)"> {{ hobby }}
+<div *ngFor="let hobbyObj of hobbiesForObjectArray">
+  <input type="checkbox" name="{{ hobbyObj.hobbyName }}" value="{{ hobbyObj.hobbyName }}" (change)="getCheckboxSelected1($event, hobbyObj)"> {{ hobbyObj.hobbyName }}
 </div>
 <br>
 
 Selected Option : -
 
-<span *ngFor="let hobby of hobbiesForObjectArray">
-  <span *ngIf="hobby.isSelected">
-    &nbsp;&nbsp;{{ hobby.hobbyName }}
-  </span>
-</span>
+<div *ngFor="let obj of hobbiesForObjectArray">
+  {{ obj | json }}
+</div>
 
 <br><hr>
 
 <select (change)="getOptionSelected($event)">
-  <option *ngFor="let hobby of hobbiesForSingleArray">{{hobby}}</option>
+  <option *ngFor="let hobby of hobbiesForSingleArray">{{ hobby }}</option>
 </select>
 
 <br><br>
@@ -59,15 +57,15 @@ Selected Option : -
 
 <br><hr>
 
-<select (change)="getOptionSelected1($event)">
-  <option *ngFor="let hobby of hobbiesForSingleArray">{{hobby}}</option>
+<select (change)="getOptionSelected1($event)" name="options">
+  <option *ngFor="let hobby of hobbiesForObjectArray">{{ hobby.hobbyName }}</option>
 </select>
 
 <br><br>
 
 Selected Option : -
 
-&nbsp;&nbsp;{{ hobbySelectedObjectArray.id }} &nbsp;&nbsp; {{ hobbySelectedObjectArray.hobbyName }}
+&nbsp;&nbsp;{{ hobbySelectedObjectArray  | json }}
 
 <br><br>
 
